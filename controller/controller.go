@@ -18,14 +18,14 @@ func ServeHome(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetAllRecords(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json") //writing this line after writing http status does'nt set content type to json
+	w.Header().Set("Content-Type", "application/json")
 
 	courses, err := service.FindAll()
 	if err != nil {
 		http.Error(w, fmt.Sprint(err), http.StatusConflict)
 		return
 	}
-	w.WriteHeader(http.StatusOK) // writing this line after writing someting to response makes it useless
+	w.WriteHeader(http.StatusOK)
 	err = json.NewEncoder(w).Encode(courses)
 	if err != nil {
 		http.Error(w, fmt.Sprint(err), http.StatusConflict)
